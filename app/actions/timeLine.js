@@ -11,7 +11,12 @@ export function setTab(tabIndex) {
     dispatch(Object.assign({ type: types.SET_TAB }, jumpToIndex(tabs, tabIndex)));
   }
 }
-
+export function controllTab(value) {
+  return {
+    type: types.CONTROLLTAB,
+    value
+  }
+}
 export function Searched(nameFromSearch) {
   return (dispatch, getState) => {
     const params = [

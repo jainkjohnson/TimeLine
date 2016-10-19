@@ -15,6 +15,7 @@ import { bindActionCreators } from 'redux'
 
 class Details extends Component {
   componentWillMount() {
+    this.props.controllTab(true);
     this.props.getDetails(this.props.NavigatorParams.id);
   }
   render() {

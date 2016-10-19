@@ -19,12 +19,12 @@ export const searchedPersons = createReducer({}, {
 });
 export const getSearched = createReducer({}, {
   [types.GET_DETAILS](state, actions) {
-    let newState={};
-    // actions.details.forEach( (person) => {
-    //   newState[person.id] = person
-    // })
-    console.log('newState', actions.details);
     return actions.details;
+  }
+});
+export const hideTab = createReducer(true, {
+  [types.CONTROLLTAB](state, actions) {
+    return actions.value;
   }
 });
 export const counter = createReducer(0, {

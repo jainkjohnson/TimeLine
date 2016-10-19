@@ -17,7 +17,8 @@ class Home extends Component {
     super(props);
     this.state = {
       textInput: '',
-      searching: false
+      searching: false,
+      offset: 0
     }
   }
   onPress() {
@@ -28,6 +29,17 @@ class Home extends Component {
   }
   person() {
     return Object.keys(this.props.searchedPersons).map(key => this.props.searchedPersons[key]);
+  }
+  handleScroll(event: Object) {
+    console.log('High', event.nativeEvent.contentOffset.y);
+    let currentOffset = event.nativeEvent.contentOffset.y;
+    if (currentOffset > this.state.offset) {
+      this.props.controllTab(false);
+    } else {
+      this.props.controllTab(true);
+    }
+    this.setState({ offset: currentOffset });
+
   }
 
   render() {
@@ -43,7 +55,10 @@ class Home extends Component {
           <Text>Search</Text>
           </TouchableHighlight>
         </View>
-        <ScrollView style={styles.scrollSection}>
+        <ScrollView
+          style={styles.scrollSection}
+          onScroll={this.handleScroll.bind(this)}
+        >
           {
             !this.state.searching && this.person().map((person) => {
               return (
