@@ -17,7 +17,7 @@ export default class Mylist extends Component {
   render() {
     console.log('props in details');
     return (
-      <View>
+      <View style={{ backgroundColor: 'red'}}>
         <Text>
           My List
         </Text>

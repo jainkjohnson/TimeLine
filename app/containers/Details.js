@@ -13,15 +13,24 @@ import { connect } from 'react-redux';
 import { ActionCreators } from '../actions'
 import { bindActionCreators } from 'redux'
 
-export default class Details extends Component {
+class Details extends Component {
+  componentWillMount() {
+    this.props.getDetails(this.props.NavigatorParams.id);
+  }
   render() {
-    console.log('props in details');
     return (
-      <View>
+      <View style={{ marginTop: 20 }}>
         <Text>
-          Details
+          Details{this.props.getSearched.full_name}
         </Text>
       </View>
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    NavigatorParams: state.NavigatorParams,
+    getSearched: state.getSearched
+  };
+}
+export default connect(mapStateToProps)(Details);

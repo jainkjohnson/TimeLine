@@ -18,13 +18,26 @@ export function Searched(nameFromSearch) {
       `search=${nameFromSearch}`
     ].join('&')
     return Api.get(`/person?${params}`).then(resp => {
-      console.log('resp', resp);
       dispatch(setSearchedPerson({ persons: resp }));
     });
   }
 }
+export function getDetails(id) {
+  console.log('inside get');
+  return (dispatch, getState) => {
+    return Api.get(`/person/${id}`).then(resp => {
+      console.log('resp', resp);
+      dispatch(setGetDetails({ details: resp }));
+    });
+  }
+}
+export function setGetDetails({ details }) {
+  return {
+    type: types.GET_DETAILS,
+    details
+  }
+}
 export function setSearchedPerson({ persons }) {
-  console.log('perons', persons);
   return {
     type: types.SET_SEARCHED_PERSONS,
     persons
@@ -37,6 +50,7 @@ export function increment() {
 }
 
 export function navigate(action) {
+  console.log('action', action);
   return (dispatch, getState) => {
     dispatch(navigateForward(action))
   }

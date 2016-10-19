@@ -20,12 +20,10 @@ import TabBar from '../components/tabBar';
 import Home from './Home'
 import Details from './Details'
 import Mylist from './myList'
-import ApplicationTabs from './ApplicationTabs';
 class AppContainer extends Component {
   constructor(props) {
     super(props);
     this._render = this._render.bind(this);
-    this._renderScene = this._renderScene.bind(this);
   }
   render() {
     return (
@@ -48,47 +46,33 @@ class AppContainer extends Component {
     );
   }
   _render(transitionProps) {
-    const scenes = transitionProps.scenes.map((scene) => {
-      const sceneProps = {
-        ...transitionProps,
-        scene,
-      };
-      return this._renderScene(sceneProps);
-    });
+    console.log('transitionProps', transitionProps);
     return (
       <View style={ { flex: 1 } }>
-        {scenes}
+        <SceneContainer
+          {...transitionProps}
+          {...this.props}
+        />
       </View>
     );
-  }
-
-  _renderScene(sceneProps) {
-    return (
-      <SceneContainer
-        {...sceneProps}
-        {...this.props}
-        key={sceneProps.scene.key}
-      />
-    )
   }
 }
 class SceneContainer extends Component {
 
   render() {
-    console.log('inside scene container', this.props);
     const style = [
       styles.scene,
       NavigationPagerStyleInterpolator.forHorizontal(this.props),
     ];
     let Scene = null;
-    if (this.props.scene.route.key === 'Home') { Scene = Home }
-    // if (this.props.scene.route.key === 'Details') { Scene = Details }
-    if (this.props.scene.route.key === 'Mylist') { Scene = Mylist }
-    console.log('Scene', this.props.scene.route.key);
+    const { key: routeKey } = this.props.scene.route;
+    if (routeKey === 'Home') { Scene = Home }
+    if (routeKey === 'Details') { Scene = Details }
+    if (routeKey === 'Mylist') { Scene = Mylist }
+    console.log('Scene', routeKey);
     return (
       <Animated.View style={style}>
           <Scene {...this.props} style={style} />
-
       </Animated.View>
     )
   }

@@ -25,13 +25,13 @@ class TabBar extends Component {
     return (
       <View style={{ flex: 1, flexDirection: 'row', backgroundColor: 'red', height: 50 }}>
         <TouchableHighlight onPress={ () =>
-          this.props.navigate( { key: 'Mylist' })
+          this.props.navigate( { key: 'Home' })
          }
           style={{ flex: 0.25, alignItems: 'center', justifyContent: 'center'}}>
           <Text>Explore</Text>
         </TouchableHighlight>
         <TouchableHighlight onPress={ () =>
-          this.props.navigate( { key: 'Home' })
+          this.props.navigate( { key: 'Mylist' })
          }
           style={{ flex: 0.25, alignItems: 'center', justifyContent: 'center'}}>
           <Text>My lists</Text>

@@ -29,12 +29,8 @@ class Home extends Component {
   person() {
     return Object.keys(this.props.searchedPersons).map(key => this.props.searchedPersons[key]);
   }
-  onDetails() {
-    console.log('details');
-  }
 
   render() {
-    console.log('props in home', this.person());
     return (
       <View style={styles.scene}>
         <View style={styles.search}>
@@ -53,7 +49,7 @@ class Home extends Component {
               return (
                 <View key={person.id}>
                   <TouchableHighlight onPress={ () =>
-                    this.props.navigate( { key: 'Home', id: person.id})
+                    this.props.navigate( { key: 'Details', id: person.id })
                    }>
                     <Image
                     source={{ uri: `http://182.72.164.150:8008/${person.photo_url}`}}

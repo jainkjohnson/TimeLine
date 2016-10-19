@@ -14,8 +14,17 @@ export const searchedPersons = createReducer({}, {
     actions.persons.forEach( (person) => {
       newState[person.id] = person
     })
-    console.log('newState', newState);
     return newState;
+  }
+});
+export const getSearched = createReducer({}, {
+  [types.GET_DETAILS](state, actions) {
+    let newState={};
+    // actions.details.forEach( (person) => {
+    //   newState[person.id] = person
+    // })
+    console.log('newState', actions.details);
+    return actions.details;
   }
 });
 export const counter = createReducer(0, {
@@ -28,12 +37,15 @@ export const counter = createReducer(0, {
 });
 export const navigationState = createReducer({ index: 0, routes: [
   { key: 'Home' },
-  { key: 'Mylist'}
+  { key: 'Mylist' },
+  { key: 'Details' }
 ]},{
   [types.NAVIGATION_FORWARD](state, actions) {
-    return NavigationStateUtils.forward(state);
+    console.log('state, action', state, actions);
+    return NavigationStateUtils.jumpTo(state, actions.state.key);
   },
   [types.NAVIGATION_BACK](state, actions) {
+    console.log('state, action', state, actions);
     return NavigationStateUtils.back(state);
   },
 });
